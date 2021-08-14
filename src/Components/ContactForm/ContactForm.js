@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
 import addContact from '../../redux/contacts/contacts-actions';
+import store from "../../redux/store";
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
@@ -14,10 +15,13 @@ const ContactForm = ({ contacts, onSubmit }) => {
     const nameInputId = shortid.generate();
     const phoneInputId = shortid.generate();
 
+    console.dir
+        (addContact);
+
     const coincidence = currentName => {
         if (!contacts) { return }
 
-        if (contacts.find(({ name }) => name.toLowerCase() === currentName)) {
+        if (store.getState().contacts.items.find(({ name }) => name.toLowerCase() === currentName)) {
             alert(`${currentName} is already in contacts`);
             return true;
         }
@@ -42,7 +46,7 @@ const ContactForm = ({ contacts, onSubmit }) => {
         event.preventDefault();
         if (coincidence(name.toLowerCase())) return;
 
-        onSubmit(name, number);
+        onSubmit({ name, number });
 
         setName('');
         setNumber('');
@@ -84,13 +88,11 @@ ContactForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ contacts }) => ({
-    contacts: contacts,
+const mapStateToProps = state => ({
+    contacts: state.contacts.item,
 })
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSubmit: (contact) => dispatch(addContact(contact)),
-    }
-}
-export default connect(null, mapDispatchToProps)(ContactForm);
+const mapDispatchToProps = dispatch => ({
+    onSubmit: contact => dispatch(addContact(contact)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

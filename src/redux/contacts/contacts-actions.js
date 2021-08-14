@@ -1,7 +1,7 @@
 import types from './contacts-type';
 import shortid from 'shortid';
 
-const addContact = (name, number) => ({
+const addContact = ({ name, number }) => ({
     type: types.ADD,
     payload: {
         id: shortid.generate(),
@@ -20,4 +20,9 @@ const changeFilter = (value) => ({
     payload: value,
 });
 
-export default { addContact, deleteContact, changeFilter };
+const actions = {
+    addContact,
+    deleteContact,
+    changeFilter
+}
+export default actions;

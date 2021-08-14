@@ -1,11 +1,11 @@
 
 import PropTypes from 'prop-types';
-
-import './App.css';
+import React from 'react';
 import Title from './Components/Title';
 import ContactForm from './Components/ContactForm';
 import ContactList from './Components/ContactList';
 import Filter from './Components/Filter';
+import './App.css';
 
 
 export default function App() {
