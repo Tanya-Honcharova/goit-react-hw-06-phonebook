@@ -1,5 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from "react-redux";
+import deleteContact from '../../redux/contacts/contacts-actions';
 
 import style from './ContactList.module.css';
 
@@ -14,7 +16,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
                             className={style.btn}
                             type="button"
                             id={id}
-                            onClick={onDeleteContact}
+                            onClick={() => onDeleteContact(id)}
                         >
                             Delete</button>
                     </li>
@@ -28,10 +30,29 @@ const ContactList = ({ contacts, onDeleteContact }) => {
 
 ContactList.defaultProps = {
     contacts: []
-}
+};
 
 ContactList.propTypes = {
     contacts: propTypes.array,
     onDeleteContact: propTypes.func.isRequired
-}
-export default ContactList;
+};
+
+const getVisibleContacts = (allContats, filter) => {
+    const normalizedFilter = filter.toLowerCase();
+
+    return allContats.filter(({ name }) =>
+        name.toLowerCase().includes(normalizedFilter),
+    );
+};
+
+const mapStateToProps = ({ contacts: { items, filter } }) => ({
+    contacts: getVisibleContacts(items, filter),
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onDeleteContact: (contactId) => dispatch(deleteContact(contactId)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

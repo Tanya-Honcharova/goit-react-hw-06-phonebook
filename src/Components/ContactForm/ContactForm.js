@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
+import { connect } from "react-redux";
+import addContact from '../../redux/contacts/contacts-actions';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
+
 import styles from './ContactForm.module.css';
 
-const ContactForm = ({ coincidence, onSubmit }) => {
+const ContactForm = ({ contacts, onSubmit }) => {
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
     const nameInputId = shortid.generate();
     const phoneInputId = shortid.generate();
+
+    const coincidence = currentName => {
+        if (!contacts) { return }
+
+        if (contacts.find(({ name }) => name.toLowerCase() === currentName)) {
+            alert(`${currentName} is already in contacts`);
+            return true;
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.currentTarget;
@@ -72,4 +84,13 @@ ContactForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
 };
 
-export default ContactForm;
+const mapStateToProps = ({ contacts }) => ({
+    contacts: contacts,
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmit: (contact) => dispatch(addContact(contact)),
+    }
+}
+export default connect(null, mapDispatchToProps)(ContactForm);
