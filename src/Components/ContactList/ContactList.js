@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { deleteContact } from '../../redux/contacts/contacts-actions';
 import contactAction from '../../redux/contacts/contacts-actions';
 
 import style from './ContactList.module.css';

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-// import {addContact} from '../../redux/contacts/contacts-actions';
 import contactAction from '../../redux/contacts/contacts-actions';
 import store from "../../redux/store";
 import PropTypes from 'prop-types';

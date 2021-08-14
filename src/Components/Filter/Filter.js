@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { changeFilter } from '../../redux/co?ntacts/contacts-actions';
 import contactAction from '../../redux/contacts/contacts-actions';
 import propsTypes from 'prop-types'
 import shortid from 'shortid';
