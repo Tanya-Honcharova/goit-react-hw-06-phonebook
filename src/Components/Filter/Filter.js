@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import changeFilter from '../../redux/contacts/contacts-actions';
+import { changeFilter } from '../../redux/contacts/contacts-actions';
 import propsTypes from 'prop-types'
 import shortid from 'shortid';
 import styles from './Filter.module.css';
