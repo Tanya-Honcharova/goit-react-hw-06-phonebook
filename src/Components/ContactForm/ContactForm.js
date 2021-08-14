@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { addContact } from '../../redux/contacts/contacts-actions';
+// import {addContact} from '../../redux/contacts/contacts-actions';
+import contactAction from '../../redux/contacts/contacts-actions';
 import store from "../../redux/store";
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
@@ -15,8 +16,6 @@ const ContactForm = ({ contacts, onSubmit }) => {
     const nameInputId = shortid.generate();
     const phoneInputId = shortid.generate();
 
-    console.dir
-        (addContact);
 
     const coincidence = currentName => {
         if (!contacts) { return }
@@ -93,6 +92,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: contact => dispatch(addContact(contact)),
+    onSubmit: contact => dispatch(contactAction.addContact(contact)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
