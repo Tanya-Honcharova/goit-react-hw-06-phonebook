@@ -47,7 +47,7 @@ const itemsReducer = createReducer(initialContacts, {
 
 
 const filterReducer = createReducer('', {
-    [actions.changeFilter]: (_, { payloat }) => payloat,
+    [actions.changeFilter]: (_, { payload }) => payload,
 });
 
 

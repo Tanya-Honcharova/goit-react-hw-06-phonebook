@@ -2,21 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import contactAction from '../../redux/contacts/contacts-actions';
 import propsTypes from 'prop-types'
-import shortid from 'shortid';
+// import shortid from 'shortid';
 import styles from './Filter.module.css';
 
+
 const Filter = ({ value, onChange }) => {
-    const inputListId = shortid.generate();
+    // const inputListId = shortid.generate();
     return (
-        <>
-            <label className={styles.label} htmlFor={inputListId}>
-                Find contacts by name
-            </label>
-            <input className={styles.input}
-                id={inputListId}
-                value={value} onChange={onChange} />
-        </>
-    )
+        <div>
+            {/* <label className={styles.label}
+                // htmlFor={inputListId}
+            >
+            </label> */}
+            <p> Find contacts by name</p>
+            <input
+                type="text"
+                className={styles.input}
+                // id={inputListId}
+                value={value}
+                onChange={onChange}
+            />
+        </div>
+    );
 };
 
 Filter.defaultProps = {
@@ -30,8 +37,10 @@ Filter.propsTypes = {
 const mapStateToProps = state => ({
     value: state.contacts.filter,
 });
+
 const mapDispatchToProps = dispatch => ({
-    onChange: event => dispatch(contactAction.changeFilter(event.target.value)),
+    onChange: e => dispatch(contactAction.changeFilter(e.target.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+

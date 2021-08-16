@@ -19,7 +19,7 @@ const ContactForm = ({ contacts, onSubmit }) => {
     const coincidence = currentName => {
         if (!contacts) { return }
 
-        if (store.getState().contacts.items.find(({ name }) => name.toLowerCase() === currentName)) {
+        if (store.store.getState().contacts.items.find(({ name }) => name.toLowerCase() === currentName)) {
             alert(`${currentName} is already in contacts`);
             return true;
         }
